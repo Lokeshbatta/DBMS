@@ -1,0 +1,77 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use Student;
+Database changed
+mysql> describe Student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Regno        | int(3)      | YES  |     | NULL    |       |
+| Studentname  | varchar(15) | NO   | PRI |         |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| dateofbirth  | date        | YES  |     | NULL    |       |
+| Mobilenumber | int(10)     | YES  |     | NULL    |       |
+| City         | varchar(15) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into faculty('542688','Deepak','M','19.09.2004','987654321','chennai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''542688','Deepak','M','19.09.2004','987654321','chennai')' at line 1
+mysql> insert into Student('542688','Deepak','M','19.09.2004','987654321','chennai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''542688','Deepak','M','19.09.2004','987654321','chennai')' at line 1
+mysql> insert into Student values('542688','Deepak','M','2004-04-26','987654321','chennai');
+ERROR 1062 (23000): Duplicate entry 'Deepak' for key 'PRIMARY'
+mysql> insert into Student values('542688','Deepak','M','2004-04-26','987654321','chennai');
+ERROR 1062 (23000): Duplicate entry 'Deepak' for key 'PRIMARY'
+mysql> insert into Student values('542688','deepakumar','M','2004-04-26','987654321','chennai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> describe Student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Regno        | int(3)      | YES  |     | NULL    |       |
+| Studentname  | varchar(15) | NO   | PRI |         |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| dateofbirth  | date        | YES  |     | NULL    |       |
+| Mobilenumber | int(10)     | YES  |     | NULL    |       |
+| City         | varchar(15) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select * from student;
++--------+-------------+--------+-------------+--------------+---------+
+| Regno  | Studentname | Gender | dateofbirth | Mobilenumber | City    |
++--------+-------------+--------+-------------+--------------+---------+
+|    123 | deepak      | M      | 2005-05-30  |    222114455 | chennai |
+| 542688 | deepakumar  | M      | 2004-04-26  |    987654321 | chennai |
++--------+-------------+--------+-------------+--------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> update student set studentname=santhosh where Regno=542688;
+ERROR 1054 (42S22): Unknown column 'santhosh' in 'field list'
+mysql>
+mysql> update student set studentname='anthosh'where Regno='542688';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++--------+-------------+--------+-------------+--------------+---------+
+| Regno  | Studentname | Gender | dateofbirth | Mobilenumber | City    |
++--------+-------------+--------+-------------+--------------+---------+
+| 542688 | anthosh     | M      | 2004-04-26  |    987654321 | chennai |
+|    123 | deepak      | M      | 2005-05-30  |    222114455 | chennai |
++--------+-------------+--------+-------------+--------------+---------+
+2 rows in set (0.00 sec)
+
+mysql>
